@@ -1,10 +1,12 @@
-﻿#include <SDL3/SDL.h>
+#include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3_mixer/SDL_mixer.h>
 #include <vector>
 #include <string>
 #include <array>
 #include <format>
+#include <filesystem>
+
 
 // STB_IMAGE_IMPLEMENTATION 宏必须在包含 stb_image.h 之前定义，
 // 且只能在一个 .cpp 文件中定义一次，用于生成 stb_image 的实现代码（而不仅仅是声明）
@@ -231,11 +233,48 @@ void handleKeyInput(const SDLState& state, GameState& gs, GameObject& obj,
 void drawParalaxBackground(SDL_Renderer* renderer, SDL_Texture* texture,
 	float xVelocity, float& scrollPos, float scrollFactor, float deltaTime);
 
+// 自动寻找并切换工作目录到包含 "data" 目录的路径，以解决 macOS .app 双击启动时找不到资源的闪退问题
+void setupWorkingDirectory()
+{
+	namespace fs = std::filesystem;
+	// 获取可执行文件所在的基准目录路径
+	const char* base_path = SDL_GetBasePath();
+	if (!base_path)
+	{
+		return;
+	}
+
+	fs::path current_dir(base_path);
+
+
+	// 循环向上查找，最多寻找 5 层父目录，寻找包含 "data" 的文件夹
+	for (int i = 0; i < 5; ++i)
+	{
+		if (fs::exists(current_dir / "data"))
+		{
+			// 找到后将当前工作路径切换为该目录
+			fs::current_path(current_dir);
+			return;
+		}
+		if (current_dir.has_parent_path())
+		{
+			current_dir = current_dir.parent_path();
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
 // ============================================================
 // 程序入口
 // ============================================================
 int main(int argc, char* argv[])
 {
+	// 切换工作路径到包含资源文件的目录，防止 macOS 下双击运行时闪退
+	setupWorkingDirectory();
+
 	// ---- 初始化窗口/逻辑分辨率参数 ----
 	SDLState state;
 	state.width = 1600;
