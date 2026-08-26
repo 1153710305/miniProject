@@ -1,0 +1,55 @@
+# ==========================================
+# 📦 整个第三方库目录：完全不上传，自行下载
+# ==========================================
+vendored/
+
+# ==========================================
+# 🪟 系统临时文件
+# ==========================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.AppleDouble
+*.log
+*.tmp
+*.bak
+
+# ==========================================
+# 💻 Visual Studio 个人配置与缓存
+# ==========================================
+.vs/
+*.user
+*.userosscache
+*.suo
+*.VC.db
+*.VC.VC.opendb
+*.sln.docstates
+
+# ==========================================
+# 🧩 编译生成的二进制文件
+# ==========================================
+*.exe
+*.dll
+*.obj
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.a
+*.so
+*.dylib
+
+# ==========================================
+# 🔨 CMake 构建产物（全部自动生成，必忽略）
+# ==========================================
+out/
+build/
+build-*/
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CMakeUserPresets.json
