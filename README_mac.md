@@ -116,7 +116,7 @@ cmake --build out/build/macos-debug
 在 macOS 上，如果直接分发编译出来的可执行二进制文件，用户在其他机器上运行可能会因为找不到 `data/` 资源目录或未安装 Homebrew 的 SDL3 依赖库而报错崩溃。
 标准的打包发行方式是构建一个独立的 **`.app` 应用包 (App Bundle)**，并将依赖的动态库 (`.dylib`) 封装到包内。
 
-我们已经在项目根目录下编写了自动化打包脚本 [package_mac.sh](file:///Users/sangsang/VSCodeProjects/miniProject/package_mac.sh)，以下是详细的打包与发行步骤。
+我们已经在项目根目录下编写了自动化打包脚本 [package_mac.py](file:///Users/sangsang/VSCodeProjects/miniProject/package_mac.py)，以下是详细的打包与发行步骤。
 
 ### 1. 准备打包环境（推荐）
 为了让打包出来的 `.app` 能够完全脱离 Homebrew 依赖，并在其他未安装开发环境的 macOS 电脑上运行，建议安装 **`dylibbundler`**。
@@ -132,14 +132,14 @@ brew install dylibbundler create-dmg
 
 ```bash
 # 赋予脚本执行权限（如已赋予可跳过）
-chmod +x package_mac.sh
+chmod +x package_mac.py
 
 # 打包指定的项目目标（默认为 sdl3-demo）
-./package_mac.sh sdl3-demo
+python3 package_mac.py sdl3-demo
 ```
 如果要打包其他目标（例如 `Undersea_Kingdom`），只需将其作为参数传入：
 ```bash
-./package_mac.sh Undersea_Kingdom
+python3 package_mac.py Undersea_Kingdom
 ```
 
 ### 3. 生成的发布产物
