@@ -9,7 +9,7 @@
 // STB_IMAGE_IMPLEMENTATION 宏必须在包含 stb_image.h 之前定义，
 // 且只能在一个 .cpp 文件中定义一次，用于生成 stb_image 的实现代码（而不仅仅是声明）
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
+#include <../vendored/stb/stb_image.h>
 
 #include "gameobject.h"
 

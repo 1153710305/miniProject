@@ -21,7 +21,8 @@ endif()
 
 target_link_libraries(Undersea_Kingdom PRIVATE SDL3::SDL3 SDL3_image::SDL3_image SDL3_mixer::SDL3_mixer SDL3_ttf::SDL3_ttf glm::glm)
 target_include_directories(Undersea_Kingdom PRIVATE 
-    "ext/"  
+    ../vendored/cJSON 
+    ../vendored/stb
     ../imgui
     ../imgui/backends
 )

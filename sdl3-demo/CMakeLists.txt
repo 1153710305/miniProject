@@ -10,8 +10,8 @@ find_package(glm REQUIRED)
 
 # 将源代码添加到此项目的可执行文件。
 add_executable (sdl3-demo 
-    #"sdl3-demo.cpp" 
-    "main.cpp" 
+    "sdl3-demo.cpp" 
+    #"main.cpp" 
     ${IMGUI_SOURCES}
     ${IMUI_HEADERS}  # 可选：只是让 VS 解决方案里显示头文件
 )
@@ -22,7 +22,8 @@ endif()
 
 target_link_libraries(sdl3-demo PRIVATE SDL3::SDL3 SDL3_image::SDL3_image SDL3_mixer::SDL3_mixer SDL3_ttf::SDL3_ttf glm::glm)
 target_include_directories(sdl3-demo PRIVATE 
-    "ext/"  
+    ../vendored/cJSON 
+    ../vendored/stb 
     ../imgui
     ../imgui/backends
 )
